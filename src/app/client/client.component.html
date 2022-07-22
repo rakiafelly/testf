@@ -1,0 +1,131 @@
+
+<!-- Button trigger modal -->
+<div class="row">
+    <div class="card">
+      <h4 class="card-header">Liste des clients</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9 my-5">
+    
+            <button type="button" class="btn btn-primary col-5 px-5 " data-bs-toggle="modal" data-bs-target="#addTagModal">
+              Ajouter un client
+            </button>
+          </div>
+          
+          <div class="col-3 my-5">
+            <div class="input-group  ">
+              <span class="input-group-text " ><i class="fa fa-search"></i></span>
+              <input type="text" class="form-control bg-gray " [(ngModel)]="searchText" placeholder="search">
+            </div>      </div>
+        </div>
+      
+    
+        <div class="row">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Type</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of clients let i=index">
+                <th>{{i+1}} </th>
+                <td>{{client.nom}} </td>
+                <td>{{client.type}} </td>
+                <td>
+                  <button class="btn btn-info text-white mx-1" (click)="showData(client._id) " data-bs-toggle="modal" data-bs-target="#updateclientModal"><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-danger" (click)="delete(client._id)"><i class="fas fa-trash" style="color:white ;" ></i></button>
+    
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    
+    
+        <div class="modal fade" id="addClientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Tag</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form *ngIf="clientForm" [formGroup]="clientForm" (ngSubmit)="addclient()">
+                  <div class="mb-3 row">
+                    <label for="nom" class="col-form-label col-sm-2">nom:</label>
+                    <div class="col-md-5">
+                      <input type="text" class="form-control" formControlName="nom" placeholder="nom"  [ngClass]="{'is-valid': submitted &&
+                      !clientForm.get('nom')?.errors,'is-invalid': submitted && clientForm.get('nom')?.errors}" >
+                      </div>
+                  </div>
+                      <div class="invalid-feedback d-block" *ngIf=" submitted && clientForm.get('nom')?.hasError('required')">
+                          nom est obligatoire
+                      </div>
+                    
+                      <div class="mb-3 row">
+                        <label for="type" class="col-form-label col-sm-2">type:</label>
+                        <div class="col-md-5">
+                          <textarea class="form-control" formControlName="type" placeholder="type"  [ngClass]="{'is-valid': submitted &&
+                          !clientForm.get('type')?.errors,'is-invalid': submitted && clientForm.get('type')?.errors}" ></textarea>
+                          </div>
+                      </div>
+                          <div class="invalid-feedback d-block" *ngIf=" submitted && clientForm.get('type')?.hasError('required')">
+                              type est obligatoire
+                          </div>
+                  <div class="mb-3 row">
+                    <label for="type" class="col-form-label col-sm-2">type:</label>
+                    <div class="col-md-5">
+                      <textarea class="form-control" formControlName="type" placeholder="type"  [ngClass]="{'is-valid': submitted &&
+                      !clientForm.get('type')?.errors,'is-invalid': submitted && clientForm.get('type')?.errors}" ></textarea>
+                      </div>
+                  </div>
+                      <div class="invalid-feedback d-block" *ngIf=" submitted && clientForm.get('type')?.hasError('required')">
+                          type est obligatoire
+                      </div>
+                
+                     
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="updateClientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form *ngIf="clientForm" [formGroup]="clientForm" (ngSubmit)="update()">
+                  <div class="mb-3 row">
+                    <label for="nom" class="col-form-label col-sm-2">nom:</label>
+                    <div class="col-md-5">
+                      <input type="text" class="form-control" formControlName="nom" placeholder="nom">
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="type" class="col-form-label col-sm-2">type:</label>
+                    <div class="col-md-5">
+                      <textarea class="form-control" formControlName="type" placeholder="type"></textarea>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

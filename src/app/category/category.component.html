@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="card">
+      <h4 class="card-header">Liste des categories</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9 my-5">
+    
+            <button type="button" class="btn btn-primary col-5 px-5 " data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+              Ajouter une categorie
+            </button>
+          </div>
+          
+          <div class="col-3 my-5">
+            <div class="input-group  ">
+              <span class="input-group-text " ><i class="fa fa-search"></i></span>
+              <input type="text" class="form-control bg-gray " placeholder="search">
+            </div>      </div>
+        </div>
+      
+    
+        <div class="row">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let category of categories let i=index">
+                <th>{{i+1}} </th>
+                <td>{{category.nom}} </td>
+                
+                <td>
+                  <button class="btn btn-info text-white mx-1" (click)="showData(category._id) " data-bs-toggle="modal" data-bs-target="#updateCategoryModal"><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-danger" (click)="delete(category._id)"><i class="fas fa-trash" style="color:white ;" ></i></button>
+    
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Create category</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form *ngIf="categoryForm" [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+                    <div class="mb-3 row">
+                      <label for="nom" class="col-form-label col-sm-2">Nom:</label>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" formControlName="nom" placeholder="Titre"  [ngClass]="{'is-valid': submitted &&
+                        !categoryForm.get('nom')?.errors,'is-invalid': submitted && categoryForm.get('titre')?.errors}" >
+                        </div>
+                    </div>
+                        <div class="invalid-feedback d-block" *ngIf=" submitted && categoryForm.get('titre')?.hasError('required')">
+                            Nom est obligatoire
+                        </div>
+                        <div class="mb-3 row">
+                        <label  class="col-form-label col-sm-4">Categories</label>
+                   <fieldset class="form-group col-sm-8" >
+
+                          <select  *ngFor=" let livre of livres" class="bootstrap" placeholder="Choisir un livre"
+                            id="livre"   formControlName="livres">
+                          </select>
+                      </fieldset>
+                       </div>
+                       
+                     <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="updateTagModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Update category</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form *ngIf="categoryForm" [formGroup]="categoryForm" (ngSubmit)="update()">
+                    <div class="mb-3 row">
+                      <label for="nom" class="col-form-label col-sm-2">Nom:</label>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" formControlName="nom" placeholder="Titre">
+                      </div>
+                    </div>
+                    
+                   <div class="mb-3 row">
+    <label  class="col-form-label col-sm-4">Categories</label>
+    <fieldset class="form-group col-sm-8" >
+      <select  *ngFor=" let livre of livres" class="bootstrap" placeholder="Choisir un livre"
+         id="category"  formControlName="livres" [multiple]="true">
+      </select>
+  </fieldset>
+   </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+

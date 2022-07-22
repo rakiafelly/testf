@@ -1,0 +1,143 @@
+<!-- Button trigger modal -->
+<div class="row">
+    <div class="card">
+      <h4 class="card-header">Liste des livres</h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9 my-5">
+    
+            <button type="button" class="btn btn-primary col-5 px-5 " data-bs-toggle="modal" data-bs-target="#addTagModal">
+              Ajouter un livre
+            </button>
+          </div>
+          
+          <div class="col-3 my-5">
+            <div class="input-group  ">
+              <span class="input-group-text " ><i class="fa fa-search"></i></span>
+              <input type="text" class="form-control bg-gray " [(ngModel)]="searchText" placeholder="search">
+            </div>      </div>
+        </div>
+      
+    
+        <div class="row">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Description</th>
+                <th scope="col">Contenu</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let livre of livres let i=index">
+                <th>{{i+1}} </th>
+                <td>{{livre.titre}} </td>
+                <td>{{livre.auteur}} </td>
+                <td>{{livre.description}} </td>
+                <td>{{livre.contenu}} </td>
+                <td>
+                  <button class="btn btn-info text-white mx-1" (click)="showData(livre._id) " data-bs-toggle="modal" data-bs-target="#updateLivreModal">update</button>
+                  <button class="btn btn-danger" (click)="delete(livre._id)">Delete</button>
+    
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    
+    
+        <div class="modal fade" id="addTagModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Tag</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form *ngIf="livreForm" [formGroup]="livreForm" (ngSubmit)="addLivre()">
+                  <div class="mb-3 row">
+                    <label for="titre" class="col-form-label col-sm-2">Title:</label>
+                    <div class="col-md-5">
+                      <input type="text" class="form-control" formControlName="titre" placeholder="Titre"  [ngClass]="{'is-valid': submitted &&
+                      !livreForm.get('titre')?.errors,'is-invalid': submitted && livreForm.get('titre')?.errors}" >
+                      </div>
+                  </div>
+                      <div class="invalid-feedback d-block" *ngIf=" submitted && livreForm.get('titre')?.hasError('required')">
+                          Titre est obligatoire
+                      </div>
+                    
+                      <div class="mb-3 row">
+                        <label for="description" class="col-form-label col-sm-2">Auteur:</label>
+                        <div class="col-md-5">
+                          <textarea class="form-control" formControlName="auteur" placeholder="Auteur"  [ngClass]="{'is-valid': submitted &&
+                          !livreForm.get('auteur')?.errors,'is-invalid': submitted && livreForm.get('auteur')?.errors}" ></textarea>
+                          </div>
+                      </div>
+                          <div class="invalid-feedback d-block" *ngIf=" submitted && livreForm.get('auteur')?.hasError('required')">
+                              Auteur est obligatoire
+                          </div>
+                  <div class="mb-3 row">
+                    <label for="description" class="col-form-label col-sm-2">Description:</label>
+                    <div class="col-md-5">
+                      <textarea class="form-control" formControlName="description" placeholder="Description"  [ngClass]="{'is-valid': submitted &&
+                      !livreForm.get('description')?.errors,'is-invalid': submitted && livreForm.get('description')?.errors}" ></textarea>
+                      </div>
+                  </div>
+                      <div class="invalid-feedback d-block" *ngIf=" submitted && livreForm.get('description')?.hasError('required')">
+                          Description est obligatoire
+                      </div>
+                
+                      <div class="mb-3 row">
+                        <label for="contenu" class="col-form-label col-sm-2">Contenu:</label>
+                        <div class="col-md-5">
+                          <textarea class="form-control" formControlName="contenu" placeholder="Contenu"  [ngClass]="{'is-valid': submitted &&
+                          !livreForm.get('contenu')?.errors,'is-invalid': submitted && livreForm.get('contenu')?.errors}" ></textarea>
+                          </div>
+                      </div>
+                          <div class="invalid-feedback d-block" *ngIf=" submitted && livreForm.get('contenu')?.hasError('required')">
+                              Contenu est obligatoire
+                          </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="updateTagModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Tag</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form *ngIf="livreForm" [formGroup]="livreForm" (ngSubmit)="update()">
+                  <div class="mb-3 row">
+                    <label for="titre" class="col-form-label col-sm-2">Titre:</label>
+                    <div class="col-md-5">
+                      <input type="text" class="form-control" formControlName="titre" placeholder="Titre">
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="description" class="col-form-label col-sm-2">Description:</label>
+                    <div class="col-md-5">
+                      <textarea class="form-control" formControlName="description" placeholder="Description"></textarea>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
