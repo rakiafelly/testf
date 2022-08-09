@@ -15,6 +15,7 @@ export class ClientComponent implements OnInit {
   submitted=false
   searchText:any
   search:any
+  
   constructor( private clientService: ClientService) { }
 
 
@@ -35,12 +36,12 @@ this.getAllclients();
     }
     this.clientService.createclient(this.clientForm?.value).subscribe((response: any) => {
  console.log(response);
-      //  this.toastr.success('Tag is created successfully','Success')
+      //  this.toastr.success('Client is created successfully','Success')
       location.reload();
     }, (error: any) => {
       console.log(error);
       
-      //  this.toastr.error('Tag already exist','Exist');
+      //  this.toastr.error('Client already exist','Exist');
     }
     )
   }

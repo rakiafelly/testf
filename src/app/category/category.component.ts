@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from './category.service';
+// import { IOption } from 'ng-select';
+
 
 
 @Component({
@@ -16,7 +18,9 @@ export class CategoryComponent implements OnInit {
   submitted=false
   searchText:any
   search:any
-  livres:any=[]
+  // livres:Array<IOption> =[]
+
+
   
   constructor( private categoryService: CategoryService) { }
 
@@ -26,6 +30,7 @@ export class CategoryComponent implements OnInit {
       livres: new FormControl('')
 
     })
+    // this.getAllLivres();
 this.getAllCategories();
   }
 
@@ -74,16 +79,16 @@ showData(id:number){
     
   }
 
-  getAllLivres(){
-    this.categoryService.getLivre().subscribe((response:any)=>{
-      this.livres=response;
+  // getAllLivres(){
+  //   this.categoryService.getLivre().subscribe((response:any)=>{
+  //     this.livres=response;
     
       
-    },(err)=>{
-      console.log(err);
+  //   },(err)=>{
+  //     console.log(err);
       
-    })
-   }
+  //   })
+  //  }
 
 }
 

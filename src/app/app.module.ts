@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +12,13 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { NavbarComponent } from './navbar/navbar.component';
+import { EspaceClientComponent } from './espace-client/espace-client.component';
+import { LoginClientComponent } from './login-client/login-client.component';
+import { ListCategoryComponent } from './list-category/list-category.component';
+import { ListLivreComponent } from './list-livre/list-livre.component';
+// import { NgSelectModule } from '@ng-select/ng-select';
+
 
 
 
@@ -24,7 +30,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ClientComponent,
     LivrePipe,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavbarComponent,
+    EspaceClientComponent,
+    LoginClientComponent,
+    ListCategoryComponent,
+    ListLivreComponent
   ],
   imports: [
     BrowserModule,
@@ -34,14 +45,16 @@ import { NgSelectModule } from '@ng-select/ng-select';
     HttpClientModule,
     CommonModule,
     RouterModule,
-    NgSelectModule,
+    // NgSelectModule
+    
   
    
   
   
   ],
 
-  
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA],
+
 
   providers: [],
   bootstrap: [AppComponent]

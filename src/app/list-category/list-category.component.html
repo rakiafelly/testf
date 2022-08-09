@@ -1,0 +1,16 @@
+<div class="card-content">
+    <div class="card-container">
+      <div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3 mt-3" *ngFor="let category of categories">
+          <div class="card h-100" [routerLink]="['/listLivre']">
+              <div class="card-body">
+                <h5 class="card-title">{{category.nom}}</h5>
+               
+             
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- </div>  -->
+  

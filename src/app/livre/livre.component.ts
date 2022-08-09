@@ -56,6 +56,8 @@ this.getAllLivres();
 
   delete(id:any){
     this.livreService.deleteLivre(id).subscribe((response:any)=>{
+      console.log(response);
+      
       this.getAllLivres();
       //  this.toastr.info('Livre is deleted successffuly','Deleted')
     },(error:any)=>{console.log(error)});

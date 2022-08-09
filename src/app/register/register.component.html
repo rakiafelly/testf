@@ -22,10 +22,10 @@
           </div>
           <div class="form-group">
               <label for="lastName">lastName</label>
-              <input type="text" formControlName="companylastName" class="form-control"  [ngClass]="{'is-valid': submitted &&
-              !registreForm.get('companylastName')?.errors,'is-invalid': submitted && registreForm.get('companylastName')?.errors}" />
+              <input type="text" formControlName="lastName" class="form-control"  [ngClass]="{'is-valid': submitted &&
+              !registreForm.get('lastName')?.errors,'is-invalid': submitted && registreForm.get('lastName')?.errors}" />
           </div>
-          <div class="invalid-feedback d-block" *ngIf=" submitted && registreForm.get('companylastName')?.hasError('required')">
+          <div class="invalid-feedback d-block" *ngIf=" submitted && registreForm.get('lastName')?.hasError('required')">
               lastName is required
           </div>
           <div class="form-group">
